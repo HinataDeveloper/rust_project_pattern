@@ -1,7 +1,7 @@
 // Date: Thu Sep 07 2026
 
 // Project: Learning Chapter 13
-// Goal: Using File IO: Using BufReader
+// Goal: ...
 // Dependency: Without dependency
 
 // rustc 1.100.0-nightly (f248f4038 2026-09-05)
