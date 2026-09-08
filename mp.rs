@@ -1,13 +1,13 @@
-// Date: Thu Sep 07 2026
+// Date: Thu Sep 08 2026
 
 // Project: Learning Chapter 13
 // Goal: Using File IO:
 // Dependency: Without dependency
 
-// rustc 1.100.0-nightly (5a2be9f5f 2026-09-06)
+// rustc 1.100.0-nightly (cea272fa3 2026-09-07)
 // binary: rustc
-// commit-hash: 5a2be9f5f075d31e3ca5526b5b029881ce441253
-// commit-date: 2026-09-06
+// commit-hash: cea272fa356e94bd2ee2cadf376630aa0683867a
+// commit-date: 2026-09-07
 // host: x86_64-unknown-linux-gnu
 // release: 1.100.0-nightly
 // LLVM version: 23.1.1
