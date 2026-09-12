@@ -4,10 +4,10 @@
 // Goal: Using Smart Pointer: ...
 // Dependency: Without dependency
 
-// rustc 1.100.0-nightly (67eda617e 2026-09-10)
+// rustc 1.100.0-nightly (0fc141305 2026-09-11)
 // binary: rustc
-// commit-hash: 67eda617e6a8f8ecec01e1ba7fafe2072a64adcc
-// commit-date: 2026-09-10
+// commit-hash: 0fc141305da7a8a222f65aef1f1acc739c46282b
+// commit-date: 2026-09-11
 // host: x86_64-unknown-linux-gnu
 // release: 1.100.0-nightly
 // LLVM version: 23.1.1
