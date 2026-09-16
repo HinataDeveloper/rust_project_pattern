@@ -1,8 +1,4 @@
-// Date: Thu Sep 15 2026
-
-// Project: Learning Chapter 15
-// Goal: Using Smart Pointer: ...
-// Dependency: Without dependency
+// Date: Thu Sep 16 2026
 
 // rustc 1.100.0-nightly (4b6d04e70 2026-09-13)
 // binary: rustc
@@ -24,9 +20,3 @@
 
 // Kernel Version: 7.2.5-200.fc44.x86_64
 // Firmware Version: 71CN51WW(V1.21)
-
-fn main() {
-    println!("\n");
-
-    println!("\nThe End ...\n");
-}
