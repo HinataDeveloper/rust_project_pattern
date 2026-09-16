@@ -1,9 +1,9 @@
 // Date: Thu Sep 16 2026
 
-// rustc 1.100.0-nightly (4b6d04e70 2026-09-13)
+// rustc 1.100.0-nightly (215a8af4b 2026-09-15)
 // binary: rustc
-// commit-hash: 4b6d04e706108ccfeafe2547fbe857dfe8972bad
-// commit-date: 2026-09-13
+// commit-hash: 215a8af4bb4c106cccf6d6535f84eaae91818265
+// commit-date: 2026-09-15
 // host: x86_64-unknown-linux-gnu
 // release: 1.100.0-nightly
 // LLVM version: 23.1.1
