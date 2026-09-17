@@ -1,17 +1,17 @@
-// Date: Thu Sep 16 2026
+// Date: Thu Sep 17 2026
 
-// rustc 1.100.0-nightly (215a8af4b 2026-09-15)
+// rustc 1.100.0-nightly (923c95cdf 2026-09-16)
 // binary: rustc
-// commit-hash: 215a8af4bb4c106cccf6d6535f84eaae91818265
-// commit-date: 2026-09-15
+// commit-hash: 923c95cdf5ba65cea505aa2ea829f578e1506ed8
+// commit-date: 2026-09-16
 // host: x86_64-unknown-linux-gnu
 // release: 1.100.0-nightly
 // LLVM version: 23.1.1
 
-// cargo 1.100.0-nightly (7941be6fb 2026-09-11)
+// cargo 1.100.0-nightly (495c385d0 2026-09-16)
 // release: 1.100.0-nightly
-// commit-hash: 7941be6fb416b4cd9666aef7b858dfea25587a8c
-// commit-date: 2026-09-11
+// commit-hash: 495c385d0875c4ba51eb72ea0448a2d4c018b8d4
+// commit-date: 2026-09-16
 // host: x86_64-unknown-linux-gnu
 // libgit2: 1.9.6 (sys:0.21.0 vendored)
 // libcurl: 8.21.0-DEV (sys:0.4.90+curl-8.21.0 vendored ssl:OpenSSL/3.6.3)
