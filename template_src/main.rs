@@ -1,17 +1,17 @@
-// Date: Thu Sep 17 2026
+// Date: Thu Sep 18 2026
 
 // Project: Learning Chapter 15
 // Goal: Using Smart Pointer: Treating smart pointer like regular reference
 // Dependency: Without dependency
 
-// rustc 1.100.0-nightly (923c95cdf 2026-09-16)
+// rustc 1.100.0-nightly (330d31712 2026-09-17)
 // binary: rustc
-// commit-hash: 923c95cdf5ba65cea505aa2ea829f578e1506ed8
-// commit-date: 2026-09-16
+// commit-hash: 330d317121e16b5db8e5adc63595910528ff2ee7
+// commit-date: 2026-09-17
 // host: x86_64-unknown-linux-gnu
 // release: 1.100.0-nightly
 // LLVM version: 23.1.1
-
+ 
 // cargo 1.100.0-nightly (495c385d0 2026-09-16)
 // release: 1.100.0-nightly
 // commit-hash: 495c385d0875c4ba51eb72ea0448a2d4c018b8d4
