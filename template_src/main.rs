@@ -1,11 +1,15 @@
 // main.rs
-// Date: Thu Sep 19 2026
+// Date: Thu Sep 21 2026
 // Educational and Practice Rust Programming Language Code
 
-// rustc 1.100.0-nightly (420ed2a0c 2026-09-18)
+// Project: Learning Chapter 15
+// Goal: Using Smart Pointer: Treating smart pointer like regular reference
+// Dependency: Without dependency
+
+// rustc 1.100.0-nightly (bba531001 2026-09-20)
 // binary: rustc
-// commit-hash: 420ed2a0c3d7225b1744266fd884d431b4d8cfe0
-// commit-date: 2026-09-18
+// commit-hash: bba531001d4de6d7f49693e0836a2668ca063282
+// commit-date: 2026-09-20
 // host: x86_64-unknown-linux-gnu
 // release: 1.100.0-nightly
 // LLVM version: 23.1.1
