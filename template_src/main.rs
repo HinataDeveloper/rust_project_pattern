@@ -1,15 +1,15 @@
 // main.rs
-// Date: Thu Sep 21 2026
+// Date: Thu Sep 23 2026
 // Educational and Practice Rust Programming Language Code
 
 // Project: Learning Chapter 15
-// Goal: Using Smart Pointer: Treating smart pointer like regular reference
+// Goal: ...
 // Dependency: Without dependency
 
-// rustc 1.100.0-nightly (bba531001 2026-09-20)
+// rustc 1.100.0-nightly (1303417c4 2026-09-21)
 // binary: rustc
-// commit-hash: bba531001d4de6d7f49693e0836a2668ca063282
-// commit-date: 2026-09-20
+// commit-hash: 1303417c416e1595173d9689e7394c31e136ae95
+// commit-date: 2026-09-21
 // host: x86_64-unknown-linux-gnu
 // release: 1.100.0-nightly
 // LLVM version: 23.1.1
@@ -24,7 +24,7 @@
 // ssl: OpenSSL 3.6.3 9 Jun 2026
 // os: Fedora 44.0.0 [64-bit]
 
-// Kernel Version: 7.2.5-200.fc44.x86_64
+// Kernel Version: 7.2.6-200.fc44.x86_64
 // Firmware Version: 71CN51WW(V1.21)
 
 fn main() {
