@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # ==============================================================================
 # NCOPY v6.1 - Full 'src' Directory Tree Iteration Engine
