@@ -1,47 +1,50 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
+# Enable strict execution mode
 set -euo pipefail
 
 # =========================
-# Colors (disable by NO_COLOR=1)
+# Zsh Native Colors
 # =========================
+autoload -Uz colors && colors
+
 if [[ "${NO_COLOR:-0}" == "1" ]]; then
-  RED='' GREEN='' YELLOW='' BLUE='' CYAN='' NC=''
+  CLR_RED='' CLR_GREEN='' CLR_YELLOW='' CLR_BLUE='' CLR_CYAN='' CLR_RESET=''
 else
-  RED='\033[0;31m'
-  GREEN='\033[0;32m'
-  YELLOW='\033[1;33m'
-  BLUE='\033[0;34m'
-  CYAN='\033[0;36m'
-  NC='\033[0m'
+  CLR_RED="$fg[red]"
+  CLR_GREEN="$fg[green]"
+  CLR_YELLOW="$fg[yellow]"
+  CLR_BLUE="$fg[blue]"
+  CLR_CYAN="$fg[cyan]"
+  CLR_RESET="$reset_color"
 fi
 
 # =========================
 # Logging helpers
 # =========================
-info()    { echo -e "${BLUE}[INFO]${NC} $*"; }
-success() { echo -e "${GREEN}[OK]${NC} $*"; }
-warn()    { echo -e "${YELLOW}[WARN]${NC} $*"; }
-error()   { echo -e "${RED}[ERROR]${NC} $*" >&2; }
+info()    { print -r -- "${CLR_BLUE}[INFO]${CLR_RESET} $*"; }
+success() { print -r -- "${CLR_GREEN}[OK]${CLR_RESET} $*"; }
+warn()    { print -r -- "${CLR_YELLOW}[WARN]${CLR_RESET} $*"; }
+error()   { print -u2 -r -- "${CLR_RED}[ERROR]${CLR_RESET} $*"; }
 die()     { error "$*"; exit 1; }
 
 # =========================
 # Checks
 # =========================
 require_file() {
-  local file="$1"
-  [[ -f "$file" ]] || die "File not found: $file (run this in your Rust project root)"
+  local target_file="$1"
+  [[ -f "$target_file" ]] || die "File not found: $target_file (run this in your Rust project root)"
 }
 
 require_command() {
   local cmd="$1"
-  command -v "$cmd" >/dev/null 2>&1 || die "Required command not found: $cmd"
+  (( $+commands[$cmd] )) || die "Required command not found: $cmd"
 }
 
 # =========================
 # Project detection
 # =========================
 get_project_name() {
-  # Extract [package].name from Cargo.toml
+  # Extract [package].name from Cargo.toml using awk
   awk -F '"' '
     /^\[package\]/ { in_package=1; next }
     /^\[/ && !/^\[package\]/ { in_package=0 }
@@ -59,15 +62,15 @@ Usage:
 
 Commands:
   fix         Run cargo fix (safe default: allow dirty)
-  check       Run cargo check
-  build       Run cargo build (dev)
-  run         Run project (dev). Pass args after -- or directly.
-  release     Run project (release). Pass args after -- or directly.
+  check       Run cargo check (denies warnings)
+  clippy      Run cargo clippy (denies warnings)
+  build       Run cargo build (dev, denies warnings)
+  run         Pipeline: check -> clippy -> build -> run (fails on any warning)
+  release     Pipeline: check -> clippy -> build --release -> run --release
   test        Run cargo test
   clean       Run cargo clean
   fmt         Run cargo fmt
-  clippy      Run cargo clippy
-  all         Run fix + fmt + clippy + test + run (dev)
+  all         Run fmt + fix + check + clippy + test + run (dev)
 
 Common options (for run/release):
   --bin <name>        Choose a specific binary (for multi-bin projects)
@@ -83,41 +86,29 @@ Examples:
   ./run.sh run --bin server -- --port 8080
   ./run.sh release --bin cli -- input.txt
   NO_COLOR=1 ./run.sh all
-
-Notes:
-- If your project has multiple binaries, prefer: ./run.sh run --bin <binname>
-- For passing arguments to your Rust program, using `--` is the safest.
 EOF
 }
 
 # =========================
-# Argument parsing (lightweight)
+# Argument parsing
 # =========================
 COMMAND="${1:-help}"
 shift || true
 
-NO_CLEAR=0
+integer NO_CLEAR=0
 BIN_NAME=""
 PACKAGE_NAME=""
+typeset -a PROGRAM_ARGS=()
 
-# Parse options (only for commands that support them; harmless otherwise)
-# We accept:
-#   --bin NAME
-#   --package NAME
-#   --no-clear
-#   --no-color
-# and allow `--` to stop parsing and pass the rest to program args.
-PROGRAM_ARGS=()
-
-while [[ $# -gt 0 ]]; do
+while (( $# > 0 )); do
   case "$1" in
     --bin)
-      [[ $# -ge 2 ]] || die "--bin requires a value"
+      (( $# >= 2 )) || die "--bin requires a value"
       BIN_NAME="$2"
       shift 2
       ;;
     --package)
-      [[ $# -ge 2 ]] || die "--package requires a value"
+      (( $# >= 2 )) || die "--package requires a value"
       PACKAGE_NAME="$2"
       shift 2
       ;;
@@ -126,8 +117,7 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     --no-color)
-      # disable colors on the fly
-      RED='' GREEN='' YELLOW='' BLUE='' CYAN='' NC=''
+      CLR_RED='' CLR_GREEN='' CLR_YELLOW='' CLR_BLUE='' CLR_CYAN='' CLR_RESET=''
       shift
       ;;
     --help|-h)
@@ -140,7 +130,6 @@ while [[ $# -gt 0 ]]; do
       break
       ;;
     *)
-      # For run/release, treat remaining as program args (convenient mode)
       PROGRAM_ARGS+=("$1")
       shift
       ;;
@@ -148,7 +137,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # =========================
-# Setup
+# Environment checks
 # =========================
 require_command cargo
 require_file Cargo.toml
@@ -160,18 +149,18 @@ if [[ -z "${PACKAGE_NAME:-}" ]]; then
   PACKAGE_NAME="$AUTO_PROJECT_NAME"
 fi
 
-if [[ "$NO_CLEAR" -eq 0 ]]; then
-  clear || true
+if (( NO_CLEAR == 0 )); then
+  clear 2>/dev/null || true
 fi
 
-info "Project: ${CYAN}${AUTO_PROJECT_NAME}${NC}"
-info "Package: ${CYAN}${PACKAGE_NAME}${NC}"
+info "Project: ${CLR_CYAN}${AUTO_PROJECT_NAME}${CLR_RESET}"
+info "Package: ${CLR_CYAN}${PACKAGE_NAME}${CLR_RESET}"
 if [[ -n "${BIN_NAME:-}" ]]; then
-  info "Bin:     ${CYAN}${BIN_NAME}${NC}"
+  info "Bin:     ${CLR_CYAN}${BIN_NAME}${CLR_RESET}"
 fi
 
-# Build common cargo args
-CARGO_SEL_ARGS=(--package "$PACKAGE_NAME")
+# Build common cargo flags array
+typeset -a CARGO_SEL_ARGS=(--package "$PACKAGE_NAME")
 if [[ -n "${BIN_NAME:-}" ]]; then
   CARGO_SEL_ARGS+=(--bin "$BIN_NAME")
 fi
@@ -186,33 +175,58 @@ cmd_fix() {
 }
 
 cmd_check() {
-  info "Running: cargo check"
-  cargo check
-  success "cargo check done"
+  info "Running: cargo check (strict: -D warnings)"
+  RUSTFLAGS="-D warnings" cargo check "${CARGO_SEL_ARGS[@]}"
+  success "cargo check passed (clean)"
+}
+
+cmd_clippy() {
+  info "Running: cargo clippy (strict: -D warnings)"
+  cargo clippy "${CARGO_SEL_ARGS[@]}" -- -D warnings
+  success "cargo clippy passed (clean)"
 }
 
 cmd_build() {
-  info "Running: cargo build"
-  cargo build
+  info "Running: cargo build (dev, strict: -D warnings)"
+  RUSTFLAGS="-D warnings" cargo build "${CARGO_SEL_ARGS[@]}"
   success "cargo build done"
 }
 
 cmd_run() {
-  info "Running: cargo run (dev)"
-  # Note: For multi-bin packages, --bin matters; for single-bin it's optional.
+  info "Pipeline: check -> clippy -> build -> execute"
+
+  # Step 1: cargo check (zero warnings)
+  cmd_check
+
+  # Step 2: cargo clippy (zero warnings)
+  cmd_clippy
+
+  # Step 3: cargo build (dev mode with zero warnings)
+  cmd_build
+
+  # Step 4: Run application
+  info "Running: application binary (dev)"
   cargo run --color=always "${CARGO_SEL_ARGS[@]}" --profile dev -- "${PROGRAM_ARGS[@]}"
-  success "cargo run done"
+  success "execution finished successfully"
 }
 
 cmd_release() {
-  info "Running: cargo run (release)"
+  info "Pipeline (Release): check -> clippy -> build --release -> execute"
+
+  cmd_check
+  cmd_clippy
+
+  info "Building binary (release mode)"
+  RUSTFLAGS="-D warnings" cargo build --release "${CARGO_SEL_ARGS[@]}"
+
+  info "Running: application binary (release)"
   cargo run --color=always "${CARGO_SEL_ARGS[@]}" --release -- "${PROGRAM_ARGS[@]}"
-  success "release run done"
+  success "release execution finished successfully"
 }
 
 cmd_test() {
   info "Running: cargo test"
-  cargo test
+  cargo test "${CARGO_SEL_ARGS[@]}"
   success "cargo test done"
 }
 
@@ -223,26 +237,16 @@ cmd_clean() {
 }
 
 cmd_fmt() {
-  require_command cargo-fmt || true
   info "Running: cargo fmt"
   cargo fmt
   success "cargo fmt done"
 }
 
-cmd_clippy() {
-  require_command cargo-clippy || true
-  info "Running: cargo clippy"
-  cargo clippy -- -D warnings
-  success "cargo clippy done"
-}
-
 cmd_all() {
-  # ترتیب پیشنهادی: fmt -> fix -> clippy -> test -> run
   cmd_fmt
   cmd_fix
-  cmd_clippy
-  cmd_test
   cmd_run
+  cmd_test
 }
 
 # =========================
@@ -251,18 +255,18 @@ cmd_all() {
 case "$COMMAND" in
   fix)     cmd_fix ;;
   check)   cmd_check ;;
+  clippy)  cmd_clippy ;;
   build)   cmd_build ;;
   run)     cmd_run ;;
   release) cmd_release ;;
   test)    cmd_test ;;
   clean)   cmd_clean ;;
   fmt)     cmd_fmt ;;
-  clippy)  cmd_clippy ;;
   all)     cmd_all ;;
   help|--help|-h|"") show_help ;;
   *)
     error "Unknown command: $COMMAND"
-    echo
+    print ""
     show_help
     exit 2
     ;;

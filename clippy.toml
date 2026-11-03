@@ -1,0 +1,4 @@
+cognitive-complexity-threshold = 20
+too-many-arguments-threshold = 8
+disallowed-names = ["..", "bar"]
+allow-unwrap-in-tests = true
