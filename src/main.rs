@@ -6,25 +6,25 @@
 // Goal: ...
 // Dependency: ...
 
-// rustc 1.101.0-nightly (4ebd25825 2026-10-15)
+// rustc 1.101.0-nightly (3e92e1a2d 2026-11-01)
 // binary: rustc
-// commit-hash: 4ebd258257737d5b7635c116fa7d281627a7e937
-// commit-date: 2026-10-15
+// commit-hash: 3e92e1a2d20b991ef23a6c6064c34d57ee8c98d3
+// commit-date: 2026-11-01
 // host: x86_64-unknown-linux-gnu
 // release: 1.101.0-nightly
-// LLVM version: 23.1.4
-
-// cargo 1.101.0-nightly (3960fa69b 2026-10-12)
+// LLVM version: 23.1.5
+ 
+// cargo 1.101.0-nightly (31d3246e0 2026-10-27)
 // release: 1.101.0-nightly
-// commit-hash: 3960fa69bb617e3d93c4ddc087c1b32bf12ad907
-// commit-date: 2026-10-12
+// commit-hash: 31d3246e0e8d3a80d4a90b54aa48ff180adb408b
+// commit-date: 2026-10-27
 // host: x86_64-unknown-linux-gnu
 // libgit2: 1.9.6 (sys:0.21.0 vendored)
 // libcurl: 8.21.0-DEV (sys:0.4.90+curl-8.21.0 vendored ssl:OpenSSL/3.6.3)
 // ssl: OpenSSL 3.6.3 9 Jun 2026
 // os: Fedora 44.0.0 [64-bit]
 
-// Kernel Version: 7.2.11-200.fc44.x86_64
+// Kernel Version: 7.2.15-200.fc44.x86_64
 // Firmware Version: 71CN51WW(V1.21)
 
 fn main() {
