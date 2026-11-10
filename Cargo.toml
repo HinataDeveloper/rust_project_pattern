@@ -2,7 +2,7 @@
 name = "redis_client"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.101"
+rust-version = "1.102"
 
 [lints.rust]
 unsafe_code = "forbid"
