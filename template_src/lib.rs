@@ -6,10 +6,10 @@
 
 // Kernel Version: 7.3.3-300.fc45.x86_64
 
-// rustc 1.102.0-nightly (9c5648833 2026-11-10)
+// rustc 1.102.0-nightly (3ef0c22cd 2026-11-11)
 // binary: rustc
-// commit-hash: 9c5648833e5ceb667a708d53c00b83ecc9e610d5
-// commit-date: 2026-11-10
+// commit-hash: 3ef0c22cdb86ac42dc6b8f0f1ec36857daa6f2a1
+// commit-date: 2026-11-11
 // host: x86_64-unknown-linux-gnu
 // release: 1.102.0-nightly
 // LLVM version: 23.1.5
