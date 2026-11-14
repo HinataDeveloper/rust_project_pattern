@@ -1,5 +1,5 @@
 [package]
-name = "redis_client"
+name = "project_name"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.102"
@@ -25,11 +25,8 @@ dbg_macro = "warn"
 # print_stderr = "warn"
 clone_on_ref_ptr = "warn"
 
-# [dependencies.redis]
-# version = "*"
-
 [dependencies]
 
 [[bin]]
-name = "redis-client"
+name = "project-name"
 path = "src/main.rs"

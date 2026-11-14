@@ -1,3 +1,13 @@
 {
-  "cSpell.words": ["Chikao", "clippy", "Hinata", "libgit"]
+  "cSpell.words": [
+    "libcurl",
+    "libgit",
+    "rustfmt",
+    "clippy",
+    "Hinata",
+    "Chikao",
+    "sublicense",
+    "NONINFRINGEMENT",
+    "MVC"
+  ]
 }
