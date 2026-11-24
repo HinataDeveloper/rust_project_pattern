@@ -6,20 +6,20 @@
 // Goal: ...
 // Dependency: ...
 
-// Kernel Version: 7.3.4-300.fc45.x86_64 
+// Kernel Version: 7.3.4-300.fc45.x86_64
 
-// rustc 1.102.0-nightly (5df8c02af 2026-11-16)
+// rustc 1.102.0-nightly (20fe935d5 2026-11-23)
 // binary: rustc
-// commit-hash: 5df8c02afdf6b882bc301442cea70f026e3d3974
-// commit-date: 2026-11-16
+// commit-hash: 20fe935d50367c0ff8872c2ebfa050c5c99d9201
+// commit-date: 2026-11-23
 // host: x86_64-unknown-linux-gnu
 // release: 1.102.0-nightly
-// LLVM version: 23.1.5
- 
-// cargo 1.102.0-nightly (ede6cefea 2026-11-11)
+// LLVM version: 23.1.6
+
+// cargo 1.102.0-nightly (ae8f06eb4 2026-11-21)
 // release: 1.102.0-nightly
-// commit-hash: ede6cefea9731cb595942338824c2f9a610b8189
-// commit-date: 2026-11-11
+// commit-hash: ae8f06eb41b8c4a534d0f280f1b9d287f45ead73
+// commit-date: 2026-11-21
 // host: x86_64-unknown-linux-gnu
 // libgit2: 1.9.6 (sys:0.21.0 vendored)
 // libcurl: 8.21.0-DEV (sys:0.4.90+curl-8.21.0 vendored ssl:OpenSSL/3.6.3)
