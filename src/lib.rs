@@ -6,14 +6,14 @@
 
 // Kernel Version: 7.3.4-300.fc45.x86_64
 
-// rustc 1.102.0-nightly (20fe935d5 2026-11-23)
+// rustc 1.102.0-nightly (6c709eb42 2026-11-25)
 // binary: rustc
-// commit-hash: 20fe935d50367c0ff8872c2ebfa050c5c99d9201
-// commit-date: 2026-11-23
+// commit-hash: 6c709eb428d472a3c3d93681c1ba37d44a1c27cf
+// commit-date: 2026-11-25
 // host: x86_64-unknown-linux-gnu
 // release: 1.102.0-nightly
 // LLVM version: 23.1.6
-
+ 
 // cargo 1.102.0-nightly (ae8f06eb4 2026-11-21)
 // release: 1.102.0-nightly
 // commit-hash: ae8f06eb41b8c4a534d0f280f1b9d287f45ead73
